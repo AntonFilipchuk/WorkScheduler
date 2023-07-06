@@ -4,7 +4,6 @@ import { ReplaySubject } from 'rxjs';
 import { IEmployee } from 'src/app/models/IEmployee';
 import { ISector } from 'src/app/models/ISector';
 import { StartingDataService } from '../StartingData/starting-data.service';
-import { ITable } from 'src/app/models/ITable';
 
 @Injectable({
   providedIn: 'root'

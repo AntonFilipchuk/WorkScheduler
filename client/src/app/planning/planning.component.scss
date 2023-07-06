@@ -1,0 +1,26 @@
+.planning-workspace {
+  display: flex;
+}
+
+.tables-for-each-employee-container {
+  padding-left: 10px;
+  display: flex;
+  position: fixed;
+  align-self: start;
+  width: 40%;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  row-gap: 10px;
+  gap: 10px;
+}
+
+.left-box {
+  width: 60%;
+}
+
+.right-box {
+  display: flex;
+  width: 40%;
+  position: sticky;
+}

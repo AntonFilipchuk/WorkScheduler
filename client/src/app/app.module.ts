@@ -5,16 +5,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainTableComponent } from './planning/main-table/main-table.component';
 import { SelectableCellComponent } from './planning/main-table/selectable-cell/selectable-cell.component';
+import { PlanningComponent } from './planning/planning.component';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     MainTableComponent,
-    SelectableCellComponent
+    SelectableCellComponent,
+    PlanningComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
