@@ -1,0 +1,37 @@
+<table>
+  <thead>
+    <tr>
+      <ng-container *ngFor="let heading of headingRow">
+        <th>{{ heading }}</th>
+      </ng-container>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let row of $table | async">
+      <tr>
+        <td>{{ row[0].timeInterval }}</td>
+        <ng-container *ngFor="let cell of row">
+          <td>
+            <app-selectable-cell [cell]="cell"></app-selectable-cell>
+          </td>
+        </ng-container>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
+
+<!-- <tr>
+  <td>09:00 - 09:10</td>
+  <td><app-selectable-cell></app-selectable-cell></td>
+  <td>Gallyamov</td>
+</tr>
+<tr>
+  <td>09:10 - 09:20</td>
+  <td><app-selectable-cell></app-selectable-cell></td>
+  <td>Gallyamov</td>
+</tr>
+<tr>
+  <td>09:20 - 09:30</td>
+  <td><app-selectable-cell></app-selectable-cell></td>
+  <td>Gallyamov</td>
+</tr> -->
