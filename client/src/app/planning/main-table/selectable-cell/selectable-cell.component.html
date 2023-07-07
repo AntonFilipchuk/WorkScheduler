@@ -1,6 +1,56 @@
 <div
   class="select-wrapper"
   [ngStyle]="{
+    'box-shadow':
+      ifShowBorder || ifSelectorActive ? 'inset 0 0 0 5px green' : '',
+    background: cellColor,
+    'pointer-events': ifCellDisabled ? 'none' : 'all'
+  }"
+  (mouseenter)="toggleBorderAndSelectorVisibility()"
+  (mouseleave)="toggleBorderAndSelectorVisibility()"
+>
+  <div
+    *ngIf="
+      ifEmployeeWhoWasChosenShouldBeSet;
+      then withoutSelector;
+      else withSelector
+    "
+  ></div>
+
+  <ng-template #withoutSelector
+    ><div
+      class="selector"
+      [ngStyle]="{ 
+    background: cellColor,
+  }"
+      (mouseover)="mouseHasTouchedCellWhereEmployeeWasSelected()"
+      (mouseenter)="setSelectedEmployee(selectedEmployee)"
+      (click)="disableSelectionOfSelectedEmployee()"
+    ></div
+  ></ng-template>
+
+  <ng-template #withSelector>
+    <select
+      *ngIf="ifShowSelector || ifSelectorActive"
+      (mousedown)="getEmployeesForSelection()"
+      [(ngModel)]="selectedEmployee"
+      (change)="onEmployeeSelection(selectedEmployee)"
+      (click)="selectionActive()"
+      (blur)="onSelectorClose(); selectionNotActive()"
+    >
+      <option
+        *ngFor="let employee of employeesForSelection"
+        [ngValue]="employee"
+      >
+        {{ employee.name }}
+      </option>
+    </select></ng-template
+  >
+</div>
+
+<!-- <div
+  class="select-wrapper"
+  [ngStyle]="{
     border: ifShowBorder || ifSelectorActive ? '5px solid green' : '',
     background: cellColor,
     'pointer-events': ifCellDisabled ? 'none' : 'all'
@@ -43,4 +93,4 @@
       </option>
     </select></ng-template
   >
-</div>
+</div> -->

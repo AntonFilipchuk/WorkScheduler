@@ -38,6 +38,7 @@ export class MainTableService
   {
     //Need to update 2 tables:
     //Full table and actual table
+    console.log('Setting employee', employee);
     this.setEmployeeAndUpdateFullTable(this._fullTable, cell, employee);
     this._$fullTable.next(this._fullTable);
     this.setEmployeeAndUpdateTable(this._actualTable, cell, employee);

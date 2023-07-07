@@ -1,4 +1,4 @@
-<table>
+<!-- <table>
   <thead>
     <tr>
       <ng-container *ngFor="let heading of headingRow">
@@ -18,4 +18,40 @@
       </tr>
     </ng-container>
   </tbody>
-</table>
+</table> -->
+
+<div class="rows-container">
+  <div class="row">
+    <ng-container *ngFor="let heading of headingRow; index as i; then rest">
+      <ng-container *ngIf="i === 0">
+        <div class="time-cell">
+          {{ heading }}
+        </div>
+      </ng-container>
+      
+      <div class="cell">
+        {{ heading }}
+      </div>
+    </ng-container>
+  </div>
+  <ng-container *ngFor="let row of $table | async">
+    <div class="row">
+      <div class="time-cell">
+        {{ row[0].timeInterval }}
+      </div>
+      <ng-container *ngFor="let cell of row">
+        <div class="cell">
+          {{ cell.rowNumber }}
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>
+
+<!-- <div class="headers-container">
+  <ng-container *ngFor="let heading of headingRow">
+    <div class="header">
+      {{ heading }}
+    </div>
+  </ng-container>
+</div> -->

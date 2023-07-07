@@ -3,6 +3,7 @@ import { EmployeeSelectionService } from 'src/app/Services/EmployeeSelection/emp
 import { MainTableService } from 'src/app/Services/MainTable/main-table.service';
 import { StartingDataService } from 'src/app/Services/StartingData/starting-data.service';
 import { IEmployee } from 'src/app/models/IEmployee';
+import { ISector } from 'src/app/models/ISector';
 import { ITableCell } from 'src/app/models/ITableCell';
 
 @Component({
@@ -21,6 +22,8 @@ export class SelectableCellComponent implements OnInit
 
   public selectedEmployee: IEmployee | undefined;
 
+
+  public ifShowSelector: boolean = false;
   public ifShowBorder: boolean = false;
   public ifSelectorActive: boolean = false;
   public ifCellDisabled: boolean = false;
@@ -41,12 +44,12 @@ export class SelectableCellComponent implements OnInit
 
   }
 
-  public setSelectedEmployee(employee: IEmployee | undefined)
+  public setSelectedEmployee(selectedEmployee: IEmployee | undefined)
   {
-    if (employee)
+    if (selectedEmployee)
     {
-      this.mainTableService.setEmployeeAndUpdateTables(this.cell, employee);
-      this.cellColor = employee.color;
+      this.mainTableService.setEmployeeAndUpdateTables(this.cell, selectedEmployee);
+      this.cellColor = selectedEmployee.color;
     }
   }
 
@@ -54,6 +57,8 @@ export class SelectableCellComponent implements OnInit
   {
     this.ifShowBorder = false;
     this.ifSelectorActive = false;
+    this.employeeSelectionService._$employeeWhoWasChosenForSelection.next(selectedEmployee);
+    this.setSelectedEmployee(selectedEmployee);
     // this.planningTableService.setEmployeeWhoWasChosenForSelection(employee);
     // this.planningTableService.setRowNumberOfSelectedEmployee(this.rowNumber);
     // this.planningTableService.setEmployeeInRow(
@@ -70,7 +75,8 @@ export class SelectableCellComponent implements OnInit
 
   public toggleBorderAndSelectorVisibility()
   {
-
+    this.ifShowBorder = !this.ifShowBorder;
+    this.ifShowSelector = !this.ifShowSelector;
   }
 
   mouseHasTouchedCellWhereEmployeeWasSelected()
@@ -91,7 +97,7 @@ export class SelectableCellComponent implements OnInit
   public selectionActive()
   {
     this.ifSelectorActive = true;
-    //this.planningTableService.setColumnNumberWhereSelectionIsActive(this.columnNumber);
+    this.employeeSelectionService._$sectorWhereSelectionIsActive.next(this.cell.sector);
   }
 
   public selectionNotActive()
@@ -103,10 +109,53 @@ export class SelectableCellComponent implements OnInit
   {
     if (!this.ifEmployeeWhoWasChosenShouldBeSet)
     {
-      //this.planningTableService.setColumnNumberWhereSelectionIsActive(-1);
+      this.employeeSelectionService._$sectorWhereSelectionIsActive.next(undefined);
     }
   }
 
 
+  private getColumnNumberWhereSelectionIsActive()
+  {
+    this.employeeSelectionService._$sectorWhereSelectionIsActive
+      .subscribe({
+        next: (sector: ISector | undefined) =>
+        {
+          this.checkIfCellShouldBeActive(sector);
+        },
+        error: (e) =>
+        {
+          console.log(e);
+        },
+      });
+  }
 
+  private checkIfCellShouldBeActive(sector: ISector | undefined)
+  {
+    this.ifCellDisabled = Boolean(sector) && (this.cell.sector.name !== sector!.name);
+    this.setCellColor();
+  }
+
+  private setCellColor()
+  {
+    let employee = this.cell.employee;
+    if (employee)
+    {
+      this.cellColor = employee.color;
+    }
+    else if (this.ifCellDisabled)
+    {
+      this.cellColor = 'lightGrey';
+    }
+    else
+    {
+      this.cellColor = 'grey';
+    }
+  }
+
+
+  public onSelectCloseTest()
+  {
+    console.log('Selection closed');
+    
+  }
 }
