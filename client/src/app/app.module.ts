@@ -7,6 +7,7 @@ import { MainTableComponent } from './planning/main-table/main-table.component';
 import { SelectableCellComponent } from './planning/main-table/selectable-cell/selectable-cell.component';
 import { PlanningComponent } from './planning/planning.component';
 import { FormsModule } from '@angular/forms';
+import { TestComponent } from './test/test.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     MainTableComponent,
     SelectableCellComponent,
-    PlanningComponent
+    PlanningComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,

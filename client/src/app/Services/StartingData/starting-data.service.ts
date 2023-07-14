@@ -32,7 +32,7 @@ let g345r: ISector = { name: 'G345R', ifDividable: true, childSectors: [g3r, g4r
 let g345p: ISector = { name: 'G345P', ifDividable: true, childSectors: [g3p, g4p, g5p] };
 
 
-let selectedSectors: ISector[] = [g12r, g12p];
+let selectedSectors: ISector[] = [g12r, g12p, g345p, g345r];
 
 let e1: IEmployee = {
   id: 1,
@@ -112,7 +112,7 @@ let todayDate: Date = new Date();
 
 let shiftStartHour: number = 9;
 let shiftStartMinutes: number = 0;
-let shiftEndHour: number = 10;
+let shiftEndHour: number = 23;
 let shiftEndMinutes: number = 0;
 
 
