@@ -10,13 +10,14 @@ import { FormsModule } from '@angular/forms';
 import { TestComponent } from './test/test.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     MainTableComponent,
     SelectableCellComponent,
     PlanningComponent,
-    TestComponent
+    TestComponent,
   ],
   imports: [
     BrowserModule,

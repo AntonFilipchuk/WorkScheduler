@@ -3,12 +3,10 @@ table {
   border-spacing: 0;
   width: 100%;
   border: 1px solid;
+  table-layout: fixed;
   .time-heading {
     width: 0px;
     text-align: center;
     white-space: nowrap;
-  }
-  .cell {
-    text-align: center;
   }
 }

@@ -11,8 +11,8 @@
     <tr>
       <td class="time-heading">{{ row[0].timeInterval }}</td>
       <ng-container *ngFor="let cell of row">
-        <td class="cell">
-          {{ cell.rowNumber }}
+        <td>
+          <app-selectable-cell [cell]="cell" class="cell"></app-selectable-cell>
         </td>
       </ng-container>
     </tr>
